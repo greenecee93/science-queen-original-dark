@@ -1,853 +1,1179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ms. Greene the Science Queen</title>
+  <meta charset="UTF-8">
+  <title>Science Tutoring | Ms. Greene the Science Queen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive science tutoring for middle school, high school, AP, and intro college students with Ms. Greene the Science Queen.">
+  <style>
+    :root {
+      --purple: #5b2c83;
+      --gold: #f4c542;
+      --teal: #1fb5a9;
+      --lime: #b7e63b;
+      --dark-navy: #111827;
+      --bg: #050816;
+      --card-bg: #0b1020;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent-soft: rgba(95, 234, 212, 0.12);
+      --border-soft: rgba(148, 163, 184, 0.35);
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.85);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease-out;
+    }
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <!-- Global Styles -->
-    <style>
-        /* ------------------------------
-           GLOBAL RESET + BASE STYLING
-        ------------------------------ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #1f2937 0, #050816 40%, #020617 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
 
-        body {
-            background-color: #f7f8ff; /* bright, soft, clean */
-            color: #1a1a1a;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        h1, h2, h3 {
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-        p {
-            font-size: 1.05rem;
-            margin-bottom: 1rem;
-        }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
 
-        /* ------------------------------
-           HERO SECTION (Teal → Lime)
-        ------------------------------ */
-        .hero {
-            background: linear-gradient(135deg, #2dd4d4 0%, #caff47 100%);
-            color: #1a1a1a;
-            padding: 80px 20px;
-            text-align: center;
-            border-radius: 0 0 20px 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
-        .hero p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 20px auto;
-        }
+    .brand-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: conic-gradient(from 210deg, var(--purple), var(--gold), var(--teal), var(--lime), var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0b1020;
+      font-weight: 800;
+      font-size: 1.4rem;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+      border: 2px solid rgba(15, 23, 42, 0.9);
+    }
 
-        .btn-primary {
-            background: #7b4bff;
-            color: white;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            font-weight: 700;
-            transition: 0.2s ease;
-        }
+    .brand-text h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
 
-        .btn-primary:hover {
-            background: #6938e6;
-            transform: translateY(-3px);
-        }
+    .brand-text p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
 
-        /* ------------------------------
-           SECTION WRAPPER (Brightened)
-        ------------------------------ */
-        section {
-            background: #ffffff;
-            margin: 40px auto;
-            padding: 40px 20px;
-            border-radius: 16px;
-            max-width: 1100px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-        }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
 
-        /* ------------------------------
-           MODULE CARDS (Brightened)
-        ------------------------------ */
-        .module-card {
-            background: #ffffff;
-            border: 2px solid #7b4bff;
-            border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(45,212,212,0.15);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+    .nav-link {
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
 
-        .module-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 20px rgba(45,212,212,0.25);
-        }
+    .nav-link:hover {
+      background: linear-gradient(135deg, rgba(91, 44, 131, 0.85), rgba(31, 181, 169, 0.85));
+      border-color: rgba(244, 197, 66, 0.9);
+      color: #f9fafb;
+      transform: translateY(-1px);
+    }
 
-        /* ------------------------------
-           GRID LAYOUTS
-        ------------------------------ */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+      gap: 22px;
+      margin-bottom: 26px;
+    }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-        }
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
 
-        /* ------------------------------
-           ICONS + SVG STYLING
-        ------------------------------ */
-        .icon {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 10px;
-        }
+    .hero-main {
+      background: radial-gradient(circle at top left, rgba(91, 44, 131, 0.35), rgba(15, 23, 42, 0.95));
+      border-radius: var(--radius-lg);
+      padding: 20px 18px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
 
-        /* ------------------------------
-           QUIZ + FLASHCARD BASE STYLES
-        ------------------------------ */
-        .quiz-box, .flashcard-box {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 20px;
-            border: 2px solid #7b4bff;
-            box-shadow: 0 4px 12px rgba(45,212,212,0.15);
-        }
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(244, 197, 66, 0.18), transparent 55%),
+        radial-gradient(circle at 90% 0%, rgba(31, 181, 169, 0.18), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(183, 230, 59, 0.18), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
 
-        .quiz-option {
-            background: #f0f4ff;
-            padding: 12px;
-            border-radius: 10px;
-            margin: 10px 0;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
 
-        .quiz-option:hover {
-            background: #e0e8ff;
-        }
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
 
-        /* ------------------------------
-           VIDEO THUMBNAILS (Clickable)
-        ------------------------------ */
-        .video-thumb {
-            width: 100%;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
+    .hero-tagline span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--gold), var(--purple));
+      box-shadow: 0 0 0 4px rgba(244, 197, 66, 0.25);
+    }
 
-        .video-thumb:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
+    .hero-title {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
 
-        /* ------------------------------
-           FOOTER
-        ------------------------------ */
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #444;
-            font-size: 0.9rem;
-        }
-    </style>
+    .hero-title span.highlight {
+      background: linear-gradient(120deg, var(--gold), var(--lime));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 14px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text-muted);
+    }
+
+    .pill.purple {
+      border-color: rgba(91, 44, 131, 0.9);
+      color: #e5e7eb;
+    }
+
+    .pill.teal {
+      border-color: rgba(31, 181, 169, 0.9);
+      color: #e5e7eb;
+    }
+
+    .pill.gold {
+      border-color: rgba(244, 197, 66, 0.9);
+      color: #fef9c3;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .btn-primary {
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      color: #f9fafb;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
+    }
+
+    .btn-secondary {
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.9rem;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: rgba(244, 197, 66, 0.9);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    .hero-footnote {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-side {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: var(--radius-lg);
+      padding: 16px 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .profile-card {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .profile-photo {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 10% 0%, var(--gold), var(--purple));
+      border: 2px solid rgba(15, 23, 42, 0.9);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #0b1020;
+    }
+
+    .profile-text h2 {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .profile-text p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .badge.ap {
+      border-color: rgba(31, 181, 169, 0.9);
+      color: #e5e7eb;
+    }
+
+    .badge.ms {
+      border-color: rgba(183, 230, 59, 0.9);
+      color: #fef9c3;
+    }
+
+    .hero-side-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-side-note strong {
+      color: #e5e7eb;
+    }
+
+    .hero-side-footer {
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-side-footer span {
+      color: var(--lime);
+      font-weight: 600;
+    }
+
+    .layout-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .layout-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 14px;
+      margin-bottom: 18px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .card-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .chip {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .chip.bio { border-color: rgba(31, 181, 169, 0.9); }
+    .chip.chem { border-color: rgba(244, 197, 66, 0.9); }
+    .chip.phys { border-color: rgba(91, 44, 131, 0.9); }
+    .chip.earth { border-color: rgba(183, 230, 59, 0.9); }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+    }
+
+    .module-card {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: radial-gradient(circle at top left, rgba(31, 181, 169, 0.18), rgba(15, 23, 42, 0.95));
+      padding: 10px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .module-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 0% 0%, rgba(244, 197, 66, 0.18), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .module-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .module-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .module-grade {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .module-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .module-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .module-btn {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .module-btn:hover {
+      background: rgba(15, 23, 42, 0.98);
+      border-color: rgba(31, 181, 169, 0.9);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    .module-btn.primary {
+      border-color: rgba(244, 197, 66, 0.9);
+      color: #fef9c3;
+    }
+
+    .module-btn.primary:hover {
+      border-color: rgba(91, 44, 131, 0.9);
+    }
+
+    .quiz-area {
+      margin-top: 8px;
+      border-radius: var(--radius-md);
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      padding: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      font-size: 0.8rem;
+    }
+
+    .quiz-question {
+      margin-bottom: 6px;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .quiz-options label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .quiz-options input {
+      accent-color: var(--teal);
+    }
+
+    .quiz-result {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      min-height: 1em;
+    }
+
+    .embed-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px;
+    }
+
+    .embed-card {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.95);
+      padding: 10px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .embed-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .embed-source {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .embed-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .embed-link {
+      font-size: 0.8rem;
+      color: var(--teal);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .booking-card {
+      background: radial-gradient(circle at top right, rgba(91, 44, 131, 0.35), rgba(15, 23, 42, 0.95));
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 14px;
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 840px) {
+      .booking-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .booking-form label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 3px;
+      color: var(--text-muted);
+    }
+
+    .booking-form input,
+    .booking-form select,
+    .booking-form textarea {
+      width: 100%;
+      padding: 7px 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+
+    .booking-form textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    .booking-form input:focus,
+    .booking-form select:focus,
+    .booking-form textarea:focus {
+      outline: none;
+      border-color: rgba(31, 181, 169, 0.9);
+      box-shadow: 0 0 0 1px rgba(31, 181, 169, 0.6);
+    }
+
+    .booking-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .btn-book {
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--gold), var(--lime));
+      color: #111827;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-book:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
+    }
+
+    .calendly-card {
+      border-radius: var(--radius-md);
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 10px 9px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .btn-calendly {
+      margin-top: 8px;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(31, 181, 169, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-calendly:hover {
+      background: rgba(31, 181, 169, 0.18);
+      border-color: rgba(244, 197, 66, 0.9);
+      color: #f9fafb;
+      transform: translateY(-1px);
+    }
+
+    footer {
+      margin-top: 26px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .footer-link:hover {
+      color: var(--teal);
+    }
+  </style>
 </head>
 <body>
-
-    <!-- ============================
-         HERO SECTION
-    ============================= -->
-    <header class="hero">
-        <h1>Ms. Greene the Science Queen 👑🔬</h1>
-        <p>Interactive STEM learning for middle school, high school, AP, and intro college students — built to boost confidence, mastery, and curiosity.</p>
-
-        <button class="btn-primary" onclick="openResource('https://calendly.com/greenecee93/30min')">
-            Schedule a 15‑minute consult <span>→</span>
-        </button>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="brand-logo">Q</div>
+        <div class="brand-text">
+          <h1>Ms. Greene the Science Queen</h1>
+          <p>Interactive STEM tutoring • Charlotte, NC • Online & in-person</p>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-link" onclick="scrollToSection('modules')">Interactive Modules</button>
+        <button class="nav-link" onclick="scrollToSection('simulations')">Virtual Labs</button>
+        <button class="nav-link" onclick="scrollToSection('booking')">Book a Session</button>
+      </nav>
     </header>
 
+    <section class="hero">
+      <div class="hero-main">
+        <div class="hero-content">
+          <div class="hero-tagline">
+            <span class="dot"></span>
+            <span>Confidence, mastery, and joy in science — for middle school, high school, AP, and intro college.</span>
+          </div>
+          <h2 class="hero-title">
+            Turn <span class="highlight">“I’m not a science person”</span> into
+            <span class="highlight">“I’ve got this.”</span>
+          </h2>
+          <p class="hero-subtitle">
+            I specialize in breaking down biology, chemistry, physics, earth science, and anatomy & physiology into clear,
+            manageable steps — with interactive practice that feels more like exploring than memorizing.
+          </p>
+          <div class="hero-pills">
+            <div class="pill purple">Middle school foundations</div>
+            <div class="pill teal">High school & honors</div>
+            <div class="pill gold">AP & intro college</div>
+            <div class="pill">Test prep • Study skills • Lab support</div>
+          </div>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="scrollToSection('booking')">
+              Book a free consult
+              <span>→</span>
+            </button>
+            <button class="btn-secondary" onclick="scrollToSection('modules')">
+              Explore interactive modules
+            </button>
+          </div>
+          <p class="hero-footnote">
+            Every session is tailored to your student’s current class, teacher expectations, and long‑term goals.
+          </p>
+        </div>
+      </div>
 
-    <!-- ============================
-         ABOUT SECTION
-    ============================= -->
-    <section id="about">
-        <h2>About Ms. Greene 👩🏽‍🏫✨</h2>
-        <p>
-            Welcome to the kingdom of science! I’m <strong>Crystal Greene</strong>, also known as 
-            <strong>Ms. Greene the Science Queen</strong> — a Charlotte‑based science educator and tutor 
-            specializing in Biology, Chemistry, Physics, Earth Science, AP Sciences, and Intro College STEM.
+      <aside class="hero-side">
+        <div class="profile-card">
+          <div class="profile-photo">G</div>
+          <div class="profile-text">
+            <h2>Crystal Greene, M.S.</h2>
+            <p>Science tutor • STEM educator • Confidence builder</p>
+            <div class="badge-row">
+              <span class="badge ap">AP Bio & Chem</span>
+              <span class="badge ms">Middle school science</span>
+              <span class="badge">Intro college STEM</span>
+            </div>
+          </div>
+        </div>
+        <p class="hero-side-note">
+          <strong>What I do best:</strong> turn messy notes and confusing lectures into clear, step‑by‑step understanding —
+          with just enough challenge to grow confidence, not anxiety.
         </p>
-
-        <p>
-            My mission is simple: make science <strong>clear</strong>, <strong>engaging</strong>, and 
-            <strong>confidence‑building</strong> for every student. Whether you're preparing for an exam, 
-            catching up, or aiming for mastery, I bring interactive tools, real‑world examples, and 
-            personalized strategies to help you succeed.
+        <p class="hero-side-footer">
+          Serving <span>Charlotte, NC</span> and beyond via Zoom.
         </p>
-
-        <div class="grid-3" style="margin-top: 30px;">
-            <!-- Card 1 -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#7b4bff">
-                    <path d="M12 2L1 21h22L12 2zm0 3.84L19.53 19H4.47L12 5.84zM11 10h2v5h-2v-5zm0 6h2v2h-2v-2z"/>
-                </svg>
-                <h3>Master Difficult Topics</h3>
-                <p>Break down complex concepts with visuals, analogies, and interactive tools.</p>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#2dd4d4">
-                    <path d="M12 7a5 5 0 015 5v4h1a1 1 0 110 2H6a1 1 0 110-2h1v-4a5 5 0 015-5zm0-5a3 3 0 013 3v1H9V5a3 3 0 013-3z"/>
-                </svg>
-                <h3>Build Confidence</h3>
-                <p>Learn step‑by‑step strategies that make science feel manageable and empowering.</p>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#caff47">
-                    <path d="M3 3h18v2H3V3zm2 4h14v2H5V7zm-2 4h18v2H3v-2zm2 4h14v2H5v-2zm-2 4h18v2H3v-2z"/>
-                </svg>
-                <h3>Interactive Learning</h3>
-                <p>Explore modules, quizzes, flashcards, and virtual labs designed for active learning.</p>
-            </div>
-        </div>
+      </aside>
     </section>
-    <!-- ============================
-         INTERACTIVE MODULES SECTION
-    ============================= -->
-    <section id="modules">
-        <h2>Interactive Science Modules 🧪📘</h2>
-        <p>Explore hands‑on, visual, and interactive modules designed to make science click. Each module includes explanations, diagrams, practice questions, and real‑world examples.</p>
 
-        <div class="grid-3" style="margin-top: 30px;">
+    <section id="modules" class="layout-grid">
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Interactive Science Modules</h3>
+              <p class="card-subtitle">Click a module to reveal a quick check question — perfect for warm‑ups or review.</p>
+            </div>
+          </div>
+          <div class="chip-row">
+            <span class="chip bio">Biology</span>
+            <span class="chip chem">Chemistry</span>
+            <span class="chip phys">Physics</span>
+            <span class="chip earth">Earth & Space</span>
+            <span class="chip">Anatomy & Physiology</span>
+          </div>
 
-            <!-- MODULE 1: Biology -->
+          <div class="module-grid">
+            <!-- Biology -->
             <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#2dd4d4">
-                    <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>
-                </svg>
-                <h3>Biology: Cells & Systems</h3>
-                <p>Explore cell structure, organelles, body systems, and biological processes with diagrams and animations.</p>
-                <button class="btn-primary" onclick="openModule('biology')">Open Module</button>
+              <div class="module-content">
+                <div class="module-title">Cell Structure & Function</div>
+                <div class="module-grade">Middle school • Biology foundations</div>
+                <div class="module-desc">
+                  Build a mental “tour” of the cell — organelles, functions, and how they work together.
+                </div>
+                <div class="module-actions">
+                  <button class="module-btn primary" onclick="toggleQuiz('quiz-bio')">Quick check</button>
+                  <button class="module-btn" onclick="openResource('https://phet.colorado.edu/en/simulations/category/biology')">Open virtual lab</button>
+                </div>
+                <div id="quiz-bio" class="quiz-area" style="display:none;">
+                  <div class="quiz-question">
+                    Which organelle is primarily responsible for producing ATP (energy) in eukaryotic cells?
+                  </div>
+                  <div class="quiz-options">
+                    <label><input type="radio" name="bio-q1" value="a"> Nucleus</label>
+                    <label><input type="radio" name="bio-q1" value="b"> Ribosome</label>
+                    <label><input type="radio" name="bio-q1" value="c"> Mitochondrion</label>
+                    <label><input type="radio" name="bio-q1" value="d"> Golgi apparatus</label>
+                  </div>
+                  <button class="module-btn" onclick="gradeQuiz('bio-q1','c','bio-result')">Check answer</button>
+                  <div id="bio-result" class="quiz-result"></div>
+                </div>
+              </div>
             </div>
 
-            <!-- MODULE 2: Chemistry -->
+            <!-- Chemistry -->
             <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#7b4bff">
-                    <path d="M7 2v2h2v6.59l-3.29 3.3a1 1 0 001.42 1.41L10 12.41V4h2V2H7zm10 0v2h-2v8.41l2.88 2.88a1 1 0 001.41-1.41L17 11.59V4h-2V2h4z"/>
-                </svg>
-                <h3>Chemistry: Atoms & Reactions</h3>
-                <p>Understand atomic structure, bonding, reactions, balancing equations, and periodic trends.</p>
-                <button class="btn-primary" onclick="openModule('chemistry')">Open Module</button>
+              <div class="module-content">
+                <div class="module-title">Balancing Chemical Equations</div>
+                <div class="module-grade">High school • Chemistry</div>
+                <div class="module-desc">
+                  Practice turning word problems and skeletal equations into balanced, meaningful chemical relationships.
+                </div>
+                <div class="module-actions">
+                  <button class="module-btn primary" onclick="toggleQuiz('quiz-chem')">Quick check</button>
+                  <button class="module-btn" onclick="openResource('https://phet.colorado.edu/en/simulation/balancing-chemical-equations')">Open PhET simulation</button>
+                </div>
+                <div id="quiz-chem" class="quiz-area" style="display:none;">
+                  <div class="quiz-question">
+                    In the balanced equation for: <em>__ H₂ + __ O₂ → __ H₂O</em>, what is the coefficient in front of H₂O?
+                  </div>
+                  <div class="quiz-options">
+                    <label><input type="radio" name="chem-q1" value="a"> 1</label>
+                    <label><input type="radio" name="chem-q1" value="b"> 2</label>
+                    <label><input type="radio" name="chem-q1" value="c"> 3</label>
+                    <label><input type="radio" name="chem-q1" value="d"> 4</label>
+                  </div>
+                  <button class="module-btn" onclick="gradeQuiz('chem-q1','b','chem-result')">Check answer</button>
+                  <div id="chem-result" class="quiz-result"></div>
+                </div>
+              </div>
             </div>
 
-            <!-- MODULE 3: Physics -->
+            <!-- Physics -->
             <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#caff47">
-                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                </svg>
-                <h3>Physics: Forces & Motion</h3>
-                <p>Learn Newton’s laws, energy, momentum, vectors, and real‑world physics applications.</p>
-                <button class="btn-primary" onclick="openModule('physics')">Open Module</button>
+              <div class="module-content">
+                <div class="module-title">Forces & Motion</div>
+                <div class="module-grade">High school • Physics</div>
+                <div class="module-desc">
+                  Connect free‑body diagrams, Newton’s laws, and everyday motion in a way that finally makes sense.
+                </div>
+                <div class="module-actions">
+                  <button class="module-btn primary" onclick="toggleQuiz('quiz-phys')">Quick check</button>
+                  <button class="module-btn" onclick="openResource('https://phet.colorado.edu/en/simulation/forces-and-motion-basics')">Open PhET simulation</button>
+                </div>
+                <div id="quiz-phys" class="quiz-area" style="display:none;">
+                  <div class="quiz-question">
+                    If net force on an object is zero, which statement is true?
+                  </div>
+                  <div class="quiz-options">
+                    <label><input type="radio" name="phys-q1" value="a"> The object must be at rest.</label>
+                    <label><input type="radio" name="phys-q1" value="b"> The object must be moving at constant velocity.</label>
+                    <label><input type="radio" name="phys-q1" value="c"> The object must be accelerating.</label>
+                    <label><input type="radio" name="phys-q1" value="d"> The object must be speeding up.</label>
+                  </div>
+                  <button class="module-btn" onclick="gradeQuiz('phys-q1','b','phys-result')">Check answer</button>
+                  <div id="phys-result" class="quiz-result"></div>
+                </div>
+              </div>
             </div>
 
-            <!-- MODULE 4: Earth Science -->
+            <!-- Earth Science -->
             <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#ffb84d">
-                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 17.93V20h-2v-.07A8.001 8.001 0 014.07 13H4v-2h.07A8.001 8.001 0 0111 4.07V4h2v.07A8.001 8.001 0 0119.93 11H20v2h-.07A8.001 8.001 0 0113 19.93z"/>
-                </svg>
-                <h3>Earth Science: Rocks & Climate</h3>
-                <p>Study Earth’s layers, weather patterns, climate systems, and geological processes.</p>
-                <button class="btn-primary" onclick="openModule('earth')">Open Module</button>
+              <div class="module-content">
+                <div class="module-title">Plate Tectonics & Earth Systems</div>
+                <div class="module-grade">Middle & high school • Earth science</div>
+                <div class="module-desc">
+                  Visualize how Earth’s plates move, interact, and create earthquakes, volcanoes, and mountain ranges.
+                </div>
+                <div class="module-actions">
+                  <button class="module-btn primary" onclick="toggleQuiz('quiz-earth')">Quick check</button>
+                  <button class="module-btn" onclick="openResource('https://www.nationalgeographic.org/education/resource-library/?q=plate%20tectonics')">Open NG resource</button>
+                </div>
+                <div id="quiz-earth" class="quiz-area" style="display:none;">
+                  <div class="quiz-question">
+                    At which type of plate boundary do mid‑ocean ridges typically form?
+                  </div>
+                  <div class="quiz-options">
+                    <label><input type="radio" name="earth-q1" value="a"> Convergent</label>
+                    <label><input type="radio" name="earth-q1" value="b"> Divergent</label>
+                    <label><input type="radio" name="earth-q1" value="c"> Transform</label>
+                    <label><input type="radio" name="earth-q1" value="d"> Subduction</label>
+                  </div>
+                  <button class="module-btn" onclick="gradeQuiz('earth-q1','b','earth-result')">Check answer</button>
+                  <div id="earth-result" class="quiz-result"></div>
+                </div>
+              </div>
             </div>
 
-            <!-- MODULE 5: Environmental Science -->
+            <!-- Anatomy & Physiology -->
             <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#4ade80">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 119.5 9 2.5 2.5 0 0112 11.5z"/>
-                </svg>
-                <h3>Environmental Science: Ecosystems</h3>
-                <p>Explore food webs, biomes, sustainability, and human impact on the environment.</p>
-                <button class="btn-primary" onclick="openModule('environment')">Open Module</button>
+              <div class="module-content">
+                <div class="module-title">Human Body Systems</div>
+                <div class="module-grade">High school • A&P</div>
+                <div class="module-desc">
+                  Map how major organ systems interact to maintain homeostasis — with clear diagrams and practice.
+                </div>
+                <div class="module-actions">
+                  <button class="module-btn primary" onclick="toggleQuiz('quiz-ap')">Quick check</button>
+                  <button class="module-btn" onclick="openResource('https://www.hhmi.org/biointeractive')">Open HHMI BioInteractive</button>
+                </div>
+                <div id="quiz-ap" class="quiz-area" style="display:none;">
+                  <div class="quiz-question">
+                    Which two systems work most directly together to deliver oxygen to body tissues?
+                  </div>
+                  <div class="quiz-options">
+                    <label><input type="radio" name="ap-q1" value="a"> Digestive & urinary</label>
+                    <label><input type="radio" name="ap-q1" value="b"> Respiratory & circulatory</label>
+                    <label><input type="radio" name="ap-q1" value="c"> Muscular & skeletal</label>
+                    <label><input type="radio" name="ap-q1" value="d"> Nervous & endocrine</label>
+                  </div>
+                  <button class="module-btn" onclick="gradeQuiz('ap-q1','b','ap-result')">Check answer</button>
+                  <div id="ap-result" class="quiz-result"></div>
+                </div>
+              </div>
             </div>
-
-            <!-- MODULE 6: Anatomy & Physiology -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#ff6b6b">
-                    <path d="M12 2a5 5 0 00-5 5v4H6a1 1 0 000 2h1v4a5 5 0 0010 0v-4h1a1 1 0 000-2h-1V7a5 5 0 00-5-5z"/>
-                </svg>
-                <h3>Anatomy & Physiology</h3>
-                <p>Learn body systems, homeostasis, organ functions, and medical science foundations.</p>
-                <button class="btn-primary" onclick="openModule('anatomy')">Open Module</button>
-            </div>
-
+          </div>
         </div>
-    </section>
-    <!-- ============================
-         QUIZZES SECTION
-    ============================= -->
-    <section id="quizzes">
-        <h2>Science Practice Quizzes 🧠✨</h2>
-        <p>Test your knowledge with quick, interactive quizzes across Biology, Chemistry, Physics, Earth Science, and more.</p>
 
-        <div class="grid-3" style="margin-top: 30px;">
-
-            <!-- QUIZ 1: Biology -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#2dd4d4">
-                    <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>
-                </svg>
-                <h3>Biology Quiz</h3>
-                <p>Cells, organelles, DNA, systems, and more.</p>
-                <button class="btn-primary" onclick="openQuiz('bioQuiz')">Start Quiz</button>
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">How sessions work</h3>
+              <p class="card-subtitle">Structured, supportive, and tailored — with room for curiosity.</p>
             </div>
-
-            <!-- QUIZ 2: Chemistry -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#7b4bff">
-                    <path d="M7 2v2h2v6.59l-3.29 3.3a1 1 0 001.42 1.41L10 12.41V4h2V2H7zm10 0v2h-2v8.41l2.88 2.88a1 1 0 001.41-1.41L17 11.59V4h-2V2h4z"/>
-                </svg>
-                <h3>Chemistry Quiz</h3>
-                <p>Atoms, bonding, reactions, periodic trends.</p>
-                <button class="btn-primary" onclick="openQuiz('chemQuiz')">Start Quiz</button>
-            </div>
-
-            <!-- QUIZ 3: Physics -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#caff47">
-                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                </svg>
-                <h3>Physics Quiz</h3>
-                <p>Forces, motion, energy, vectors.</p>
-                <button class="btn-primary" onclick="openQuiz('physQuiz')">Start Quiz</button>
-            </div>
-
-            <!-- QUIZ 4: Earth Science -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#ffb84d">
-                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 17.93V20h-2v-.07A8.001 8.001 0 014.07 13H4v-2h.07A8.001 8.001 0 0111 4.07V4h2v.07A8.001 8.001 0 0119.93 11H20v2h-.07A8.001 8.001 0 0113 19.93z"/>
-                </svg>
-                <h3>Earth Science Quiz</h3>
-                <p>Rocks, weather, climate, Earth systems.</p>
-                <button class="btn-primary" onclick="openQuiz('earthQuiz')">Start Quiz</button>
-            </div>
-
-            <!-- QUIZ 5: Environmental Science -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#4ade80">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 119.5 9 2.5 2.5 0 0112 11.5z"/>
-                </svg>
-                <h3>Environmental Science Quiz</h3>
-                <p>Ecosystems, biomes, sustainability.</p>
-                <button class="btn-primary" onclick="openQuiz('envQuiz')">Start Quiz</button>
-            </div>
-
-            <!-- QUIZ 6: Anatomy & Physiology -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#ff6b6b">
-                    <path d="M12 2a5 5 0 00-5 5v4H6a1 1 0 000 2h1v4a5 5 0 0010 0v-4h1a1 1 0 000-2h-1V7a5 5 0 00-5-5z"/>
-                </svg>
-                <h3>Anatomy & Physiology Quiz</h3>
-                <p>Body systems, homeostasis, organ functions.</p>
-                <button class="btn-primary" onclick="openQuiz('anatQuiz')">Start Quiz</button>
-            </div>
-
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:6px;">
+            Each session blends:
+          </p>
+          <ul style="font-size:0.8rem; color:var(--text-muted); padding-left:18px; margin-bottom:6px;">
+            <li>Clarifying current class content and expectations</li>
+            <li>Breaking down complex topics into manageable steps</li>
+            <li>Guided practice with immediate feedback</li>
+            <li>Study strategies tailored to how your student learns best</li>
+          </ul>
+          <p style="font-size:0.8rem; color:var(--text-muted);">
+            We’ll track progress over time so your student sees their own growth — not just grades.
+          </p>
         </div>
-    </section>
-    <!-- ============================
-         FLASHCARDS SECTION
-    ============================= -->
-    <section id="flashcards">
-        <h2>Science Flashcards 🧬🧠</h2>
-        <p>Review key vocabulary, concepts, and definitions with interactive flashcards. Flip each card and test your recall!</p>
+      </div>
 
-        <div class="flashcard-box" id="flashcardBox">
-
-            <!-- Flashcard Icon -->
-            <svg class="icon" viewBox="0 0 24 24" fill="#7b4bff">
-                <path d="M3 5a2 2 0 012-2h10l6 6v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13 0v4h4l-4-4z"/>
-            </svg>
-
-            <h3 id="flashcardTitle">Biology Flashcards</h3>
-
-            <!-- Flashcard Display -->
-            <div id="flashcardDisplay" style="
-                background: #ffffff;
-                border: 2px solid #7b4bff;
-                border-radius: 14px;
-                padding: 30px;
-                margin: 20px 0;
-                text-align: center;
-                font-size: 1.3rem;
-                font-weight: 600;
-                min-height: 120px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                box-shadow: 0 4px 12px rgba(45,212,212,0.15);
-                transition: 0.2s ease;
-            ">
-                Click to flip the card
+      <div id="simulations">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Virtual Labs & Simulations</h3>
+              <p class="card-subtitle">Trusted resources we can use together during sessions.</p>
+            </div>
+          </div>
+          <div class="embed-grid">
+            <div class="embed-card">
+              <div class="embed-title">PhET Interactive Simulations</div>
+              <div class="embed-source">University of Colorado Boulder</div>
+              <div class="embed-desc">
+                High‑quality, interactive simulations for physics, chemistry, biology, and math — perfect for visual learners.
+              </div>
+              <button class="module-btn" onclick="openResource('https://phet.colorado.edu')">Open PhET</button>
             </div>
 
-            <!-- Flashcard Controls -->
-            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
-                <button class="btn-primary" onclick="prevFlashcard()">← Previous</button>
-                <button class="btn-primary" onclick="nextFlashcard()">Next →</button>
+            <div class="embed-card">
+              <div class="embed-title">HHMI BioInteractive</div>
+              <div class="embed-source">Howard Hughes Medical Institute</div>
+              <div class="embed-desc">
+                Short films, animations, and virtual labs that bring complex biological concepts to life.
+              </div>
+              <button class="module-btn" onclick="openResource('https://www.hhmi.org/biointeractive')">Open HHMI</button>
             </div>
 
-            <!-- Flashcard Category Selector -->
-            <div style="margin-top: 25px; text-align: center;">
-                <label for="flashcardCategory" style="font-weight: 600;">Choose a subject:</label>
-                <select id="flashcardCategory" onchange="changeFlashcardCategory()" style="
-                    padding: 10px;
-                    border-radius: 10px;
-                    border: 2px solid #7b4bff;
-                    font-size: 1rem;
-                    margin-left: 10px;
-                ">
-                    <option value="biology">Biology</option>
-                    <option value="chemistry">Chemistry</option>
-                    <option value="physics">Physics</option>
-                    <option value="earth">Earth Science</option>
-                    <option value="environment">Environmental Science</option>
-                    <option value="anatomy">Anatomy & Physiology</option>
+            <div class="embed-card">
+              <div class="embed-title">NASA & Earth Science Visualizations</div>
+              <div class="embed-source">NASA / Earth Observatory</div>
+              <div class="embed-desc">
+                Visuals and interactive maps for climate, weather, and Earth systems — great for earth science units.
+              </div>
+              <button class="module-btn" onclick="openResource('https://earthdata.nasa.gov/learn')">Open NASA Earthdata</button>
+            </div>
+
+            <div class="embed-card">
+              <div class="embed-title">Smithsonian Science Education Center</div>
+              <div class="embed-source">Smithsonian</div>
+              <div class="embed-desc">
+                Inquiry‑based resources and activities that connect science to real‑world problems and solutions.
+              </div>
+              <button class="module-btn" onclick="openResource('https://ssec.si.edu')">Open Smithsonian SSEC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card booking-card" id="booking">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Book a Tutoring Session</h3>
+              <p class="card-subtitle">Start with a free 15‑minute consult to see if we’re a good fit.</p>
+            </div>
+          </div>
+
+          <div class="booking-grid">
+            <div>
+              <form class="booking-form" action="https://formspree.io/f/your-form-id-here" method="POST">
+                <label for="parent-name">Parent/Guardian name</label>
+                <input id="parent-name" name="parent_name" type="text" required>
+
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required>
+
+                <label for="student-name">Student name</label>
+                <input id="student-name" name="student_name" type="text" required>
+
+                <label for="grade-level">Grade level</label>
+                <select id="grade-level" name="grade_level" required>
+                  <option value="">Select grade level</option>
+                  <option>Middle school (6–8)</option>
+                  <option>High school (9–12)</option>
+                  <option>AP / IB</option>
+                  <option>Intro college</option>
                 </select>
+
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject" required>
+                  <option value="">Select subject</option>
+                  <option>General science (middle school)</option>
+                  <option>Biology</option>
+                  <option>Chemistry</option>
+                  <option>Physics</option>
+                  <option>Earth & environmental science</option>
+                  <option>Anatomy & physiology</option>
+                  <option>Other / multiple</option>
+                </select>
+
+                <label for="needs">What does your student need most right now?</label>
+                <textarea id="needs" name="needs" placeholder="Upcoming test, homework support, lab reports, building foundations, study skills, etc."></textarea>
+
+                <p class="booking-note">
+                  I’ll reply within 24–48 hours with available times and a suggested starting plan.
+                </p>
+
+                <button type="submit" class="btn-book">
+                  Submit consult request
+                  <span>→</span>
+                </button>
+              </form>
             </div>
 
+            <div>
+              <div class="calendly-card">
+                <p>
+                  Prefer to pick a time directly? Use my Calendly link to schedule a free 15‑minute consult.
+                </p>
+                <button class="btn-calendly" onclick="openResource('https://calendly.com/your-calendly-link-here')">
+                  Open Calendly
+                  <span>↗</span>
+                </button>
+                <p style="margin-top:8px;">
+                  We’ll use that time to:
+                </p>
+                <ul style="font-size:0.8rem; color:var(--text-muted); padding-left:18px; margin-top:4px;">
+                  <li>Clarify your student’s current class and challenges</li>
+                  <li>Set goals for the next 4–6 weeks</li>
+                  <li>Decide on a session frequency that fits your schedule</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
-    <!-- ============================
-         VIRTUAL LABS SECTION
-    ============================= -->
-    <section id="virtual-labs">
-        <h2>Virtual Science Labs 🔬💻</h2>
-        <p>Explore interactive virtual labs that simulate real scientific experiments. Click a thumbnail to open the full lab in a new tab.</p>
 
-        <div class="grid-3" style="margin-top: 30px;">
-
-            <!-- LAB 1: Photosynthesis -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#4ade80">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 119.5 9 2.5 2.5 0 0112 11.5z"/>
-                </svg>
-                <h3>Photosynthesis Lab</h3>
-                <p>Observe how light intensity affects oxygen production in plants.</p>
-                <img 
-                    src="https://img.youtube.com/vi/UPBMG5EYydo/hqdefault.jpg" 
-                    class="video-thumb"
-                    onclick="openResource('https://www.youtube.com/watch?v=UPBMG5EYydo')"
-                >
-            </div>
-
-            <!-- LAB 2: Chemical Reactions -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#7b4bff">
-                    <path d="M7 2v2h2v6.59l-3.29 3.3a1 1 0 001.42 1.41L10 12.41V4h2V2H7zm10 0v2h-2v8.41l2.88 2.88a1 1 0 001.41-1.41L17 11.59V4h-2V2h4z"/>
-                </svg>
-                <h3>Chemical Reactions Lab</h3>
-                <p>Explore reaction rates, catalysts, and temperature effects.</p>
-                <img 
-                    src="https://img.youtube.com/vi/1ZJ2kJQ2YpA/hqdefault.jpg" 
-                    class="video-thumb"
-                    onclick="openResource('https://www.youtube.com/watch?v=1ZJ2kJQ2YpA')"
-                >
-            </div>
-
-            <!-- LAB 3: Newton’s Laws -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#caff47">
-                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                </svg>
-                <h3>Newton’s Laws Lab</h3>
-                <p>Experiment with motion, force, and acceleration.</p>
-                <img 
-                    src="https://img.youtube.com/vi/kKKM8Y-u7ds/hqdefault.jpg" 
-                    class="video-thumb"
-                    onclick="openResource('https://www.youtube.com/watch?v=kKKM8Y-u7ds')"
-                >
-            </div>
-
-            <!-- LAB 4: Rock Cycle -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#ffb84d">
-                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 17.93V20h-2v-.07A8.001 8.001 0 014.07 13H4v-2h.07A8.001 8.001 0 0111 4.07V4h2v.07A8.001 8.001 0 0119.93 11H20v2h-.07A8.001 8.001 0 0113 19.93z"/>
-                </svg>
-                <h3>Rock Cycle Lab</h3>
-                <p>See how heat, pressure, and erosion transform rocks.</p>
-                <img 
-                    src="https://img.youtube.com/vi/pm6cCg_Do6k/hqdefault.jpg" 
-                    class="video-thumb"
-                    onclick="openResource('https://www.youtube.com/watch?v=pm6cCg_Do6k')"
-                >
-            </div>
-
-            <!-- LAB 5: Ecosystems -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#4ade80">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 119.5 9 2.5 2.5 0 0112 11.5z"/>
-                </svg>
-                <h3>Ecosystems Lab</h3>
-                <p>Explore food webs, energy flow, and population dynamics.</p>
-                <img 
-                    src="https://img.youtube.com/vi/TeVZ6jZ2KpM/hqdefault.jpg" 
-                    class="video-thumb"
-                    onclick="openResource('https://www.youtube.com/watch?v=TeVZ6jZ2KpM')"
-                >
-            </div>
-
-            <!-- LAB 6: Human Body Systems -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#ff6b6b">
-                    <path d="M12 2a5 5 0 00-5 5v4H6a1 1 0 000 2h1v4a5 5 0 0010 0v-4h1a1 1 0 000-2h-1V7a5 5 0 00-5-5z"/>
-                </svg>
-                <h3>Human Body Systems Lab</h3>
-                <p>Learn how organs and systems work together to maintain homeostasis.</p>
-                <img 
-                    src="https://img.youtube.com/vi/8FqYjX2Q0rA/hqdefault.jpg" 
-                    class="video-thumb"
-                    onclick="openResource('https://www.youtube.com/watch?v=8FqYjX2Q0rA')"
-                >
-            </div>
-
-        </div>
-    </section>
-    <!-- ============================
-         BOOKING FORM SECTION
-    ============================= -->
-    <section id="booking">
-        <h2>Book a Tutoring Session 📅✨</h2>
-        <p>Ready to boost your confidence in science? Send a message or schedule a session below.</p>
-
-        <div class="grid-2" style="margin-top: 30px;">
-
-            <!-- CONTACT FORM -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#7b4bff">
-                    <path d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm2 0v14h14V5H5zm2 3h10v2H7V8zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
-                </svg>
-
-                <h3>Send a Message</h3>
-
-                <form action="https://formspree.io/f/mqkrjvwj" method="POST" style="margin-top: 15px;">
-                    <label>Name:</label>
-                    <input type="text" name="name" required style="
-                        width: 100%; padding: 10px; margin-bottom: 10px;
-                        border-radius: 10px; border: 2px solid #7b4bff;
-                    ">
-
-                    <label>Email:</label>
-                    <input type="email" name="email" required style="
-                        width: 100%; padding: 10px; margin-bottom: 10px;
-                        border-radius: 10px; border: 2px solid #7b4bff;
-                    ">
-
-                    <label>Message:</label>
-                    <textarea name="message" rows="4" required style="
-                        width: 100%; padding: 10px; margin-bottom: 10px;
-                        border-radius: 10px; border: 2px solid #7b4bff;
-                    "></textarea>
-
-                    <button class="btn-primary" type="submit">Send Message</button>
-                </form>
-            </div>
-
-            <!-- CALENDLY CARD -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#2dd4d4">
-                    <path d="M7 2a2 2 0 00-2 2v2H3v2h2v8H3v2h2v2a2 2 0 002 2h10a2 2 0 002-2v-2h2v-2h-2V8h2V6h-2V4a2 2 0 00-2-2H7zm0 4V4h10v2H7zm0 2h10v10H7V8z"/>
-                </svg>
-
-                <h3>Schedule a Session</h3>
-                <p>Choose a time that works for you using my live calendar.</p>
-
-                <button class="btn-primary" onclick="openResource('https://calendly.com/greenecee93/30min')">
-                    Open Calendly →
-                </button>
-            </div>
-
-        </div>
-    </section>
-    <!-- ============================
-         RESOURCE LIBRARY SECTION
-    ============================= -->
-    <section id="resources">
-        <h2>Science Resource Library 📚🔍</h2>
-        <p>Explore curated study tools, reference sheets, videos, and external resources to support your learning.</p>
-
-        <div class="grid-3" style="margin-top: 30px;">
-
-            <!-- RESOURCE 1: Biology -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#2dd4d4">
-                    <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>
-                </svg>
-                <h3>Biology Reference Sheets</h3>
-                <p>Cell structure, DNA, photosynthesis, body systems, and more.</p>
-                <button class="btn-primary" onclick="openResource('https://www.khanacademy.org/science/biology')">
-                    Open Resource →
-                </button>
-            </div>
-
-            <!-- RESOURCE 2: Chemistry -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#7b4bff">
-                    <path d="M7 2v2h2v6.59l-3.29 3.3a1 1 0 001.42 1.41L10 12.41V4h2V2H7zm10 0v2h-2v8.41l2.88 2.88a1 1 0 001.41-1.41L17 11.59V4h-2V2h4z"/>
-                </svg>
-                <h3>Chemistry Study Tools</h3>
-                <p>Periodic table, bonding, reactions, stoichiometry, and more.</p>
-                <button class="btn-primary" onclick="openResource('https://www.chemguide.co.uk')">
-                    Open Resource →
-                </button>
-            </div>
-
-            <!-- RESOURCE 3: Physics -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#caff47">
-                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                </svg>
-                <h3>Physics Simulations</h3>
-                <p>Interactive simulations for forces, motion, energy, and waves.</p>
-                <button class="btn-primary" onclick="openResource('https://phet.colorado.edu/en/simulations/category/physics')">
-                    Open Resource →
-                </button>
-            </div>
-
-            <!-- RESOURCE 4: Earth Science -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#ffb84d">
-                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 17.93V20h-2v-.07A8.001 8.001 0 014.07 13H4v-2h.07A8.001 8.001 0 0111 4.07V4h2v.07A8.001 8.001 0 0119.93 11H20v2h-.07A8.001 8.001 0 0113 19.93z"/>
-                </svg>
-                <h3>Earth Science Guides</h3>
-                <p>Geology, weather, climate, Earth systems, and more.</p>
-                <button class="btn-primary" onclick="openResource('https://www.nationalgeographic.org/education')">
-                    Open Resource →
-                </button>
-            </div>
-
-            <!-- RESOURCE 5: Environmental Science -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#4ade80">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 119.5 9 2.5 2.5 0 0112 11.5z"/>
-                </svg>
-                <h3>Environmental Science Resources</h3>
-                <p>Ecosystems, sustainability, human impact, and conservation.</p>
-                <button class="btn-primary" onclick="openResource('https://www.epa.gov/students')">
-                    Open Resource →
-                </button>
-            </div>
-
-            <!-- RESOURCE 6: Anatomy & Physiology -->
-            <div class="module-card">
-                <svg class="icon" viewBox="0 0 24 24" fill="#ff6b6b">
-                    <path d="M12 2a5 5 0 00-5 5v4H6a1 1 0 000 2h1v4a5 5 0 0010 0v-4h1a1 1 0 000-2h-1V7a5 5 0 00-5-5z"/>
-                </svg>
-                <h3>Anatomy & Physiology Tools</h3>
-                <p>Body systems, organ functions, diagrams, and medical basics.</p>
-                <button class="btn-primary" onclick="openResource('https://www.visiblebody.com')">
-                    Open Resource →
-                </button>
-            </div>
-
-        </div>
-    </section>
-    <!-- ============================
-         FOOTER SECTION
-    ============================= -->
     <footer>
-        <p>© 2026 Ms. Greene the Science Queen — Charlotte, NC</p>
-        <p>Empowering students through confidence, clarity, and curiosity in science. 👑🔬</p>
+      <div>
+        © <span id="year"></span> Ms. Greene the Science Queen • Science Tutoring • Charlotte, NC
+      </div>
+      <div class="footer-links">
+        <span class="footer-link" onclick="scrollToSection('modules')">Interactive modules</span>
+        <span class="footer-link" onclick="scrollToSection('booking')">Book a session</span>
+      </div>
     </footer>
-    <!-- ============================
-         JAVASCRIPT — INTERACTIVES
-    ============================= -->
-    <script>
-        /* -----------------------------------------
-           OPEN EXTERNAL RESOURCE (new tab)
-        ----------------------------------------- */
-        function openResource(url) {
-            window.open(url, "_blank");
-        }
+  </div>
 
-        /* -----------------------------------------
-           MODULE OPENING (scroll to section)
-        ----------------------------------------- */
-        function openModule(moduleId) {
-            alert("Opening " + moduleId + " module! Scroll down to see more features.");
-        }
+  <script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
-        /* -----------------------------------------
-           QUIZ ENGINE
-        ----------------------------------------- */
-        const quizzes = {
-            bioQuiz: [
-                { q: "What is the powerhouse of the cell?", a: "Mitochondria" },
-                { q: "DNA stands for?", a: "Deoxyribonucleic acid" },
-                { q: "Plants make food through?", a: "Photosynthesis" }
-            ],
-            chemQuiz: [
-                { q: "What is the atomic number of Carbon?", a: "6" },
-                { q: "H2O is known as?", a: "Water" },
-                { q: "NaCl is?", a: "Salt" }
-            ],
-            physQuiz: [
-                { q: "Force = mass × ___?", a: "Acceleration" },
-                { q: "Unit of energy?", a: "Joule" },
-                { q: "Speed = distance ÷ ___?", a: "Time" }
-            ],
-            earthQuiz: [
-                { q: "The Earth has how many layers?", a: "4" },
-                { q: "Rocks are formed through the ___ cycle.", a: "Rock" },
-                { q: "Weather occurs in which layer?", a: "Troposphere" }
-            ],
-            envQuiz: [
-                { q: "A group of interacting organisms is a?", a: "Community" },
-                { q: "Largest biome?", a: "Ocean" },
-                { q: "Renewable energy example?", a: "Solar" }
-            ],
-            anatQuiz: [
-                { q: "The heart pumps ___?", a: "Blood" },
-                { q: "Largest organ?", a: "Skin" },
-                { q: "The brain is part of the ___ system.", a: "Nervous" }
-            ]
-        };
+    function toggleQuiz(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
+    }
 
-        function openQuiz(quizId) {
-            const quiz = quizzes[quizId];
-            let score = 0;
+    function gradeQuiz(groupName, correctValue, resultId) {
+      const inputs = document.querySelectorAll('input[name="' + groupName + '"]');
+      let selected = null;
+      inputs.forEach(i => { if (i.checked) selected = i.value; });
+      const resultEl = document.getElementById(resultId);
+      if (!resultEl) return;
 
-            for (let i = 0; i < quiz.length; i++) {
-                let userAnswer = prompt(quiz[i].q);
-                if (!userAnswer) continue;
-                if (userAnswer.trim().toLowerCase() === quiz[i].a.toLowerCase()) {
-                    score++;
-                }
-            }
+      if (!selected) {
+        resultEl.textContent = 'Choose an answer to check your understanding.';
+        resultEl.style.color = '#9ca3af';
+        return;
+      }
 
-            alert("You scored " + score + " out of " + quizzes[quizId].length + "!");
-        }
+      if (selected === correctValue) {
+        resultEl.textContent = 'Nice work — that’s correct!';
+        resultEl.style.color = '#b7e63b';
+      } else {
+        resultEl.textContent = 'Not quite. Let’s talk through why the correct answer makes sense.';
+        resultEl.style.color = '#f97373';
+      }
+    }
 
-        /* -----------------------------------------
-           FLASHCARD ENGINE
-        ----------------------------------------- */
-        const flashcards = {
-            biology: [
-                { front: "Mitochondria", back: "Powerhouse of the cell" },
-                { front: "Photosynthesis", back: "Plants making food using sunlight" },
-                { front: "DNA", back: "Genetic material" }
-            ],
-            chemistry: [
-                { front: "Atom", back: "Smallest unit of matter" },
-                { front: "H2O", back: "Water" },
-                { front: "NaCl", back: "Salt" }
-            ],
-            physics: [
-                { front: "Force", back: "Push or pull" },
-                { front: "Energy", back: "Ability to do work" },
-                { front: "Velocity", back: "Speed with direction" }
-            ],
-            earth: [
-                { front: "Igneous", back: "Formed from cooled magma" },
-                { front: "Sedimentary", back: "Formed from compressed layers" },
-                { front: "Metamorphic", back: "Changed by heat/pressure" }
-            ],
-            environment: [
-                { front: "Ecosystem", back: "Community + environment" },
-                { front: "Biome", back: "Large ecological area" },
-                { front: "Sustainability", back: "Using resources responsibly" }
-            ],
-            anatomy: [
-                { front: "Heart", back: "Pumps blood" },
-                { front: "Lungs", back: "Gas exchange" },
-                { front: "Brain", back: "Controls body functions" }
-            ]
-        };
+    function openResource(url) {
+      window.open(url, '_blank', 'noopener');
+    }
 
-        let currentFlashcards = flashcards.biology;
-        let flashIndex = 0;
-        let flipped = false;
-
-        const flashDisplay = document.getElementById("flashcardDisplay");
-        const flashTitle = document.getElementById("flashcardTitle");
-
-        flashDisplay.addEventListener("click", () => {
-            flipped = !flipped;
-            updateFlashcard();
-        });
-
-        function updateFlashcard() {
-            const card = currentFlashcards[flashIndex];
-            flashDisplay.textContent = flipped ? card.back : card.front;
-        }
-
-        function nextFlashcard() {
-            flashIndex = (flashIndex + 1) % currentFlashcards.length;
-            flipped = false;
-            updateFlashcard();
-        }
-
-        function prevFlashcard() {
-            flashIndex = (flashIndex - 1 + currentFlashcards.length) % currentFlashcards.length;
-            flipped = false;
-            updateFlashcard();
-        }
-
-        function changeFlashcardCategory() {
-            const category = document.getElementById("flashcardCategory").value;
-            currentFlashcards = flashcards[category];
-            flashIndex = 0;
-            flipped = false;
-            flashTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1) + " Flashcards";
-            updateFlashcard();
-        }
-
-        updateFlashcard();
-
-        /* -----------------------------------------
-           SMOOTH SCROLLING FOR NAVIGATION
-        ----------------------------------------- */
-        document.querySelectorAll("a[href^='#']").forEach(anchor => {
-            anchor.addEventListener("click", function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute("href")).scrollIntoView({
-                    behavior: "smooth"
-                });
-            });
-        });
-    </script>
-
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
